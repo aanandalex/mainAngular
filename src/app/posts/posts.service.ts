@@ -45,4 +45,14 @@ export class PostsService {
 
     return this.http.put("http://localhost:3000/donation/" + postId, userData);
   }
+
+  commentProject(comment, postId, userId, name) {
+    const userData = {
+      comment: comment,
+      userId: userId,
+      name: name,
+    }
+    
+    return this.http.put("http://localhost:3000/commentProject/" + postId, userData);
+  }
 }

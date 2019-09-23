@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 import { PostsService } from '../posts.service';
 import { AuthService } from 'src/app/auth/auth.service';
@@ -39,6 +40,16 @@ export class PostListComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.postService.deleteProject(postId).subscribe((Response: any) => {
       this.isLoading = false;
+      console.log(Response);
+      this.ngOnInit();
+    })
+  }
+
+  onComment(userComment: NgForm,postId: string) {
+    if (userComment.invalid) {
+      return;
+    }
+    this.postService.commentProject(userComment.value.comment, postId, this.userId, this.name).subscribe((Response: any) => {
       console.log(Response);
       this.ngOnInit();
     })
