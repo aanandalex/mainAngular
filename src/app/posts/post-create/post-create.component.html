@@ -1,0 +1,22 @@
+<mat-card>
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <form (submit)="onAddProject(postForm)" #postForm="ngForm" *ngIf="!isLoading">
+        <mat-form-field>
+            <input matInput type="text" name="title" placeholder="Project Title" [ngModel]="post[0]?.title" required minlength="3" #title="ngModel">
+            <mat-error *ngIf="title.invalid">Please enter a Title to your Project</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <textarea matInput rows="6" name="content" placeholder="Project Content" [ngModel]="post[0]?.content" required minlength="3" #content="ngModel"></textarea>
+            <mat-error *ngIf="content.invalid">Please enter content to your Project</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="number" name="cost" placeholder="Estimated Cost" [ngModel]="post[0]?.cost" required #cost="ngModel">
+            <mat-error *ngIf="cost.invalid">Please enter Estimated Cost to carry out this project</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="number" name="minDonation" placeholder="Minimum Accepted Donation" [ngModel]="post[0]?.minDonation" required #minAmount="ngModel">
+            <mat-error *ngIf="minAmount.invalid">Please enter a minimum amount to be accepted as donation</mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">SAVE PROJECT</button>
+    </form>
+</mat-card>

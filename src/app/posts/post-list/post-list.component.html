@@ -1,0 +1,58 @@
+<mat-card *ngIf="isLoading">
+        <mat-spinner *ngIf="isLoading"></mat-spinner>
+</mat-card>
+<main *ngIf="posts.length > 0 && !isLoading">
+    <mat-card *ngFor="let post of posts">
+        <mat-card-content>
+            <mat-card-title>{{ post.creatorName }}</mat-card-title>
+            <mat-card-subtitle>Project Creator</mat-card-subtitle>
+        </mat-card-content>
+        <mat-card-content>
+            <mat-card-title>
+                <h1>{{ post.title }}</h1>
+            </mat-card-title>
+            <mat-card-title></mat-card-title>
+            <h4>{{ post.content }}</h4>
+            <hr color="accent">
+            <mat-card-subtitle>
+                <h3>Estimated Budget</h3><span>
+                    <h1>{{ post.cost }}</h1>
+                </span>
+            </mat-card-subtitle>
+            <mat-card-subtitle>
+                <h3>Collected</h3><span>
+                    <h1>{{ post.donation.length }}</h1>
+                </span>
+                <hr color="accent">
+            </mat-card-subtitle>
+            <mat-card-subtitle>
+                <h3>Liked by</h3><span>
+                    <h1>{{ post.likes.length }}</h1>
+                </span>
+                <hr color="accent">
+            </mat-card-subtitle>
+            <mat-card-subtitle>
+                <h3>Donated by</h3><span>
+                    <h1>{{ post.donation.length }}</h1>
+                </span>
+                <hr color="accent">
+            </mat-card-subtitle>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-button color="accent" (click)="onLike(post._id)">LIKE</button>
+            <button mat-button color="warn" [routerLink]="['/donate',post._id]">DONATE</button>
+            <a mat-button color="accent" [routerLink]="['/edit', post._id]" *ngIf="userIsAuthenticated && userId == post.creatorId">EDIT</a>
+            <button mat-button color="warn" (click)="onDelete(post._id)" *ngIf="userIsAuthenticated && userId == post.creatorId">DELETE</button>
+        </mat-card-actions>
+
+        <mat-list role="list" *ngFor="let user of post.comment">
+            <mat-list-item role="listitem"> {{ user.commentedUser }}</mat-list-item>
+            <mat-list-item role="listitem"> {{ user.userComment }}</mat-list-item>
+        </mat-list>
+        <mat-form-field>
+            <input matInput type="text" placeholder="Comments">
+        </mat-form-field>
+        <button mat-raised-button color="primary">COMMENT</button>
+    </mat-card>
+</main>
+<p class="mat-body-1" *ngIf="posts.length <= 0 && !isLoading">No projects Added Yet!</p>

@@ -1,0 +1,21 @@
+<mat-card>
+    <mat-card-title>
+        <h1>{{ name }}</h1>
+        <h1>{{ userId}}</h1>
+    </mat-card-title>
+    <mat-card-content>
+        <h1>{{ postId }}</h1>
+    </mat-card-content>
+</mat-card>
+
+<mat-card>
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <form (submit)="onDonation(postForm)" #postForm="ngForm" *ngIf="!isLoading">
+        <mat-form-field>
+            <input matInput type="number" name="donation" placeholder="Donation" ngModel required minlength="3"
+                #donationInput="ngModel">
+            <mat-error *ngIf="donationInput.invalid">Please fill Donation</mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">Donate</button>
+    </form>
+</mat-card>
