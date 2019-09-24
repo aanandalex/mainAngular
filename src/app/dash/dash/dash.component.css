@@ -2,3 +2,11 @@ mat-card {
     width: 50%;
     margin: 5rem auto;
 }
+
+mat-spinner {
+    margin: 5rem auto;
+}
+
+p {
+    text-align: center;
+}

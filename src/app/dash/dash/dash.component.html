@@ -1,5 +1,8 @@
-<mat-card>
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<mat-card *ngIf="!isLoading">
     <google-chart #chart [title]="title" [type]="type" [data]="data" [columnNames]="columnNames" [options]="options"
         [width]="width" [height]="height">
     </google-chart>
+    <p>crowd Funding = {{(crowdfunding/total)*100}}%</p>
+  <p>Success = {{(success/total)*100}}%</p>
 </mat-card>

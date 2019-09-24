@@ -1,8 +1,32 @@
-<mat-card>
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<mat-card *ngIf="!isLoading">
     <mat-card-title>
-        <h1>{{ name }}, Your Balance is</h1>
+        <h2>{{ name }}</h2>
     </mat-card-title>
     <mat-card-content>
-        <h1>{{ wallet }}</h1>
+        <p>Balance in Your Wallet</p>
+        <h1>{{userWallet}}</h1>
+    </mat-card-content>
+</mat-card>
+
+<mat-card>
+    <mat-card-title>
+        <p>Top Up</p>
+    </mat-card-title>
+    <mat-card-content>
+        <mat-spinner *ngIf="isLoading"></mat-spinner>
+        <form (submit)="onTopUp(postForm)" #postForm="ngForm" *ngIf="!isLoading">
+            <mat-form-field>
+                <input matInput type="number" name="creditCardNum" placeholder="Credit Card Number" ngModel required minlength="3"
+                    #cardInput="ngModel">
+                <mat-error *ngIf="cardInput.invalid">Enter Credit Card Number</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="number" name="topup" placeholder="Top Up" ngModel required minlength="3"
+                    #donationInput="ngModel">
+                <mat-error *ngIf="donationInput.invalid">Please fill Top Up</mat-error>
+            </mat-form-field>
+            <button mat-raised-button color="primary" type="submit">Top Up</button>
+        </form>
     </mat-card-content>
 </mat-card>

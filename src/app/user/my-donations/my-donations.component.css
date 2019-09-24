@@ -1,0 +1,21 @@
+mat-card {
+    width: 70%;
+    margin: 6rem auto;
+}
+
+mat-form-field,input {
+    width: 100%;
+}
+
+p {
+    margin: 6rem auto;
+    text-align: center;
+}
+
+mat-spinner {
+    margin: auto;
+}
+
+h4 {
+    text-align: justify;
+}

@@ -2,3 +2,15 @@ mat-card {
     margin: 4rem auto;
     width: 80%;
 }
+
+mat-form-field,input {
+    width: 100%;
+}
+
+mat-spinner {
+    margin: 4rem auto;
+}
+
+h1 {
+    color: red;
+}

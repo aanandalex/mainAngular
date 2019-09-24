@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DashService } from '../dash.service';
 
 @Component({
   selector: 'app-dash',
@@ -6,22 +7,46 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dash.component.css']
 })
 export class DashComponent implements OnInit {
+
+  success: number;
+  crowdfunding: number;
+  total: number;
   title = 'Crowd Funded Projects';
   type = 'PieChart';
   data = [
-    ['Success', 25.0],
-    ['Ongoing', 35.0],
-    ['Failure', 40.0],
-   
+    ['Success', 75],
+    ['CrowdFunding', 25]
   ];
-  columnNames = ['Projects','Percentage'];
+
+
+  columnNames = ['Projects', 'Percentage'];
   options = {};
   width = 550;
   height = 440;
 
-  constructor() { }
+  constructor(private dashService: DashService) { }
+
+  isLoading = false;
+
 
   ngOnInit() {
+    this.isLoading = true;
+    this.dashService.crowdFunding().subscribe((Response: Array<Object>) => {
+      this.isLoading = false;
+      this.crowdfunding = Response.length;
+    })
+
+    this.isLoading = true;
+    this.dashService.projectSuccess().subscribe((Response: Array<Object>) => {
+      this.isLoading = false;
+      this.success = Response.length;
+    })
+
+    this.isLoading = true;
+    this.dashService.totalNoOfProject().subscribe((Response: Array<Object>) => {
+      this.isLoading = false;
+      this.total = Response.length;
+    })
   }
 
 }
